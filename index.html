@@ -1,18 +1,35 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>LDAvis</title>
-    <script src="d3.v3.js"></script>
-    <script src="ldavis.js"></script>
-    <link rel="stylesheet" type="text/css" href="lda.css">
-  </head>
+<head>
+  
+  <title>Link Randomizer Test </title>
+</head>
+<body>
+  
 
-  <body>
-    <div id = "lda"></div>
-    <script>
-      var vis = new LDAvis("#lda", "lda.json");
-    </script>
-  </body>
+<a href="javascript:openSite()">Mit einem Klick auf diesen Text gelangst du zum Experiment</a>
 
+<script>
+var links = [
+              "google.com",
+              "youtube.com",
+              "reddit.com",
+              "apple.com"]
+
+            function openSite() {
+              // get a random number between 0 and the number of links
+              var randIdx = Math.random() * links.length;
+              // round it, so it can be used as array index
+              randIdx = parseInt(randIdx, 10);
+              // construct the link to be opened
+              var link = 'http://' + links[randIdx];
+              return link;
+              };
+             
+ 
+    document.getElementById("link").innerHTML = openSite();
+</script>
+
+</body>
 </html>
+
