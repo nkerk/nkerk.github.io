@@ -5,31 +5,27 @@
   <title>Link Randomizer Test </title>
 </head>
 <body>
-  
-
-<a href="javascript:openSite()">Mit einem Klick auf diesen Text gelangst du zum Experiment</a>
 
 <script>
-var links = [
-              "google.com",
-              "youtube.com",
-              "reddit.com",
-              "apple.com"]
+var acceptedWebsites = ['http://www.cnn.com/', 'www.nytimes.com', 'www.latimes.com', 'http://www.washingtonpost.com/', 'http://www.nbcnews.com/', 'http://www.foxnews.com/'];
 
-            function openSite() {
-              // get a random number between 0 and the number of links
-              var randIdx = Math.random() * links.length;
-              // round it, so it can be used as array index
-              randIdx = parseInt(randIdx, 10);
-              // construct the link to be opened
-              var link = 'http://' + links[randIdx];
-              return link;
-              };
-             
- 
-    document.getElementById("link").innerHTML = openSite();
+// This function returns a random key for an array
+function randomKey(arr) {
+    // Math.random() returns a number between 0 and 0.99999...
+    // If you multiply this value with the length of an array, you get a
+    // random floating point number between 0 and that length.
+    // Use Math.floor() to round it down to the next integer
+    return Math.floor(Math.random() * arr.length);
+}
+
+// Select a random website from the array
+var key = randomKey(acceptedWebsites);
+var newLocation = acceptedWebsites[key];
+
+// Redirect the user
+window.location.href = newLocation;
+
 </script>
 
 </body>
 </html>
-
