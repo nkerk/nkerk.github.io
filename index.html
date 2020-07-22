@@ -1,37 +1,81 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  
-  <title>Link Randomizer Test </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/bmabey/pyLDAvis/files/ldavis.v1.0.0.css">
+  <style>
+  html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  h1, p{margin-left: 25px;}
+  h2, p{margin-left: 25px;}
+  </style>
+  <title>Topic Modeling - Model Selection Visualization with PyLDAvis </title>
 </head>
 <body>
+    <h1>Model Selection: Deciding the Number of Topics</h1>
+    <h2>(80% of sample used for training, 20% for evaluation) </h2>
+    <h2>(Final model is fit on the whole sample) </h2>
+    <h1>Choose a Model to Inspect it More Closely</h1>
+<p>
+<select id="topics" name=topics placeholder="Min: 2, max: 100" min="2" max="100">
+  <option disabled selected value> -- select an option -- </option>  
+  <option value="final">Final Model: 25 Topics</option>
+  <option value=2>2 Topics</option>
+  <option value=4>4 Topics</option>
+  <option value=6>6 Topics</option>
+  <option value=8>8 Topics</option>
+  <option value=10>10 Topics</option>
+  <option value=15>15 Topics</option>
+  <option value=20>20 Topics</option>
+  <option value=25>25 Topics</option>
+  <option value=30>30 Topics</option>
+  <option value=35>35 Topics</option>
+  <option value=40>40 Topics</option>
+  <option value=45>45 Topics</option>
+  <option value=50>50 Topics</option>
+  <option value=55>55 Topics</option>
+  <option value=60>60 Topics</option>
+  <option value=65>65 Topics</option>
+  <option value=70>70 Topics</option>
+  <option value=75>75 Topics</option>
+  <option value=80>80 Topics</option>
+  <option value=85>85 Topics</option>
+  <option value=90>90 Topics</option>
+  <option value=95>95 Topics</option>
+  <option value=100>100 Topics</option>
 
-<a id=red_msg href="">Falls Sie nicht automatisch weitergeleitet werden, klicken Sie bitte hier.</a><br />
-Sie gelangen dann zu unserem Experiment.
+</select>
+</p>
 
 <script>
-var acceptedWebsites = ['http://www.cnn.com/', 'http://www.nytimes.com', 'http://www.latimes.com', 'http://www.washingtonpost.com/', 'http://www.nbcnews.com/', 'http://www.foxnews.com/'];
+    // select
+    document.addEventListener('DOMContentLoaded',function() {
+        document.querySelector('select[name="topics"]').onchange=changeEventHandler;
+    },false);
 
-// This function returns a random key for an array
-function randomKey(arr) {
-    // Math.random() returns a number between 0 and 0.99999...
-    // If you multiply this value with the length of an array, you get a
-    // random floating point number between 0 and that length.
-    // Use Math.floor() to round it down to the next integer
-    return Math.floor(Math.random() * arr.length);
-}
+    function changeEventHandler(event) {
+        if(event.target.value >= 2 && event.target.value <= 100){
+          // window.location = event.target.value + 'topics.html';
+          window.location = 'model_'+event.target.value+'_topics.html';
+        } else if (event.target.value == "final"){
+          // window.location = event.target.value + 'topics.html';
+          window.location = 'final_model_mallet_25_topics.html';
+        }else{
+          alert('Please choose a topic number between 2 and 100.');
+        }
+    }
+    </script>
 
-// Select a random website from the array
-var key = randomKey(acceptedWebsites);
-var newLocation = acceptedWebsites[key];
 
-//write to Link if automatic redirect doesnt work
-document.getElementById('red_msg').href = newLocation;
-
-// Redirect the user
-window.location.href = newLocation;
-
-</script>
+<figure>
+<img src="./imgs/models_overview.png" alt="Perplexity, UMass- and C_V Coherence for Models with Various K Topics ">
+ <figcaption>Sweetspot seems to be around 15 to 35 topics. </figcaption>
+</figure>
+<p> </p>
+<img src="./imgs/graphs.png" alt="Perplexity and Coherence">
 
 </body>
 </html>
+
